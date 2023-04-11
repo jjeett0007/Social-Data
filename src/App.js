@@ -1,23 +1,44 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Home from './Public/Home';
+import Signup from './Public/Signup';
 
 function App() {
+
+  const App = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: "15px",
+  };
+
+  const division1 = {
+    width: "27%",
+    height: "95vh",
+    border: "2px solid black",
+    margin: "auto",
+    borderRadius: "10px",
+    backgroundColor: "black",
+  };
+
+  const division2 = {
+    width: "68%",
+    height: "95vh",
+    border: "2px solid black",
+    margin: "auto",
+    borderRadius: "10px",
+    backgroundColor: "black",
+    color: "white",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={App} className="App">
+      <div style={division1}></div>
+      <div style={division2}>
+        <Signup />
+      </div>
     </div>
   );
 }
