@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Home from './Public/Home';
 import Signup from './Public/Signup';
+import Login from './Public/Login';
+import Profile from './Private/Profile';
+
 
 function App() {
 
@@ -33,11 +36,12 @@ function App() {
     flexDirection: "row",
     alignItems: "center",
   };
+
   return (
     <div style={App} className="App">
       <div style={division1}></div>
       <div style={division2}>
-        <Signup />
+        <Login />
       </div>
     </div>
   );

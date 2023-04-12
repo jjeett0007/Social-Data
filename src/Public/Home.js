@@ -19,7 +19,6 @@ const Home = () => {
         borderRadius: "10px",
         display: "flex",
         alignItems: "center",
-        // margin: "auto",
     }
 
     const TEXT = {
