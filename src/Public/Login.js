@@ -1,6 +1,49 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+    const [email, setEmail] = useState("John@doe.com");
+    const [password, setPassword] = useState("Password");
+    const [error, setError] = useState();
+    const navigate = useNavigate();
+
+
+
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        const data = {
+            email,
+            password,
+        };
+
+        try {
+            const response = await axios.post('http://localhost:3001/login', data);
+            console.log(response.data);
+            navigate("/profile");
+        } catch (error) {
+            if (error.response) {
+                switch (error.response.status) {
+                    case 405:
+                        setError("User not Found");
+                        break;
+                    case 406:
+                        setError("Incorrect Password");
+                        break;
+                    default:
+                        setError("Something went wrong. Please try again later.");
+                }
+            } else {
+                setError("Something went wrong. Please check your internet connection and try again.");
+            }
+        }
+    }
+
+
+
 
     const Logins = {
         margin: "auto",
@@ -70,30 +113,34 @@ const Login = () => {
         marginRight: "auto",
         border: "none",
         borderRadius: "3px",
+        padding: "5px",
     }
 
     return (
         <>
             <div style={Logins}>
                 <div style={Forform}>
-                    <form>
+                    <form onsSubmit={handleSubmit}>
                         <div style={Alignforms}>
-                            
+
                             <div style={Formdiv}>
                                 <label>Email</label>
                                 <br></br>
-                                <input style={input} />
+                                <input type="email" value={email} style={input} onChange={(event) => setEmail(event.target.value)} />
                             </div>
                             <div style={Formdiv}>
                                 <label>Password</label>
                                 <br></br>
-                                <input style={input} />
+                                <input type="password" value={password} style={input} onChange={(event) => setPassword(event.target.value)} />
                             </div>
+
+                            {error && <p>{error}</p>}
+
                             <div style={Formdivbutton}>
-                                <button style={ButtonSignup}>Sign Up</button>
+                                <button style={ButtonSignup} onClick={handleSubmit}>Log In</button>
                             </div>
                             <div style={Formdivlogin}>
-                                <p style={Login}>Don't have an account? <a href="/">Sign up</a></p>
+                                <p style={Login}>Don't have an account? <Link to="/signup">Sign Up</Link></p>
                             </div>
                         </div>
                     </form>

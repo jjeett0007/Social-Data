@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Public/Home';
 import Signup from './Public/Signup';
 import Login from './Public/Login';
@@ -40,8 +41,16 @@ function App() {
   return (
     <div style={App} className="App">
       <div style={division1}></div>
+
       <div style={division2}>
-        <Login />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </div>
   );

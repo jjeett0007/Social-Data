@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet, Link } from 'react-router-dom';
 
 const Home = () => {
     const home = {
@@ -55,12 +56,21 @@ const Home = () => {
 
                 <div style={Body}>
                     <div style={Buttons}>
-                        <button>Home</button>
-                        <button>Sign in</button>
-                        <button>Sign up</button>
-                        <button>Profile</button>
+                        <button>
+                            <Link to="/">Home</Link>
+                        </button>
+                        <button>
+                            <Link to="/login">Sign in</Link>
+                        </button>
+                        <button>
+                            <Link to="/signup">Sign up</Link>
+                        </button>
+                        <button>
+                            <Link to="/profile">Profile</Link>
+                        </button>
                     </div>
                 </div>
+                <Outlet/>
             </div>
         </>
     )
