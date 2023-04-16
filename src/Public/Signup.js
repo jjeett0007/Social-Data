@@ -16,7 +16,7 @@ const Signup = () => {
 
 
 
-    async function handleSubnit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const data = {
@@ -130,11 +130,16 @@ const Signup = () => {
         padding: "5px"
     }
 
+    const errorMessage = {
+        position: "absolute",
+        top: "15px",
+    }
+
     return (
         <>
             <div style={Signup}>
                 <div style={Forform}>
-                    <form action="POST" onSubmit={handleSubnit}>
+                    <form action="POST" onSubmit={handleSubmit}>
                         <div style={Alignforms}>
                             <div style={Formdiv}>
                                 <label>First name</label>
@@ -167,10 +172,8 @@ const Signup = () => {
                                 <input style={input} type="password" placeholder={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
                             </div>
 
-                            {error && <p>{error}</p>}
-
                             <div style={Formdivbutton}>
-                                <button type="submit" style={ButtonSignup} onClick={handleSubnit}>Sign Up</button>
+                                <button type="submit" style={ButtonSignup} onClick={handleSubmit}>Sign Up</button>
                             </div>
                             <div style={Formdivlogin}>
                                 <p style={Login}>Don't have an account? <Link to="/login">Login</Link></p>
@@ -179,6 +182,7 @@ const Signup = () => {
                     </form>
                 </div>
             </div>
+            <div style={errorMessage}>{error && <p>{error}</p>}</div>
         </>
     )
 };

@@ -8,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState("Password");
     const [error, setError] = useState();
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
 
 
@@ -23,10 +24,15 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:3001/login', data);
             console.log(response.data);
+            const { token } = response.data;
+            localStorage.setItem("token", response.data.token);
             navigate("/profile");
         } catch (error) {
             if (error.response) {
                 switch (error.response.status) {
+                    case 400:
+                        setError("Fill all Inout");
+                        break;
                     case 405:
                         setError("User not Found");
                         break;
@@ -41,6 +47,9 @@ const Login = () => {
             }
         }
     }
+
+    console.log(token)
+
 
 
 
@@ -114,6 +123,11 @@ const Login = () => {
         border: "none",
         borderRadius: "3px",
         padding: "5px",
+    };
+
+    const errorMessage = {
+        position: "absolute",
+        top: "15px",
     }
 
     return (
@@ -126,15 +140,13 @@ const Login = () => {
                             <div style={Formdiv}>
                                 <label>Email</label>
                                 <br></br>
-                                <input type="email" value={email} style={input} onChange={(event) => setEmail(event.target.value)} />
+                                <input type="email" value={email} style={input} onChange={(event) => setEmail(event.target.value)} require />
                             </div>
                             <div style={Formdiv}>
                                 <label>Password</label>
                                 <br></br>
-                                <input type="password" value={password} style={input} onChange={(event) => setPassword(event.target.value)} />
+                                <input type="password" value={password} style={input} onChange={(event) => setPassword(event.target.value)} require />
                             </div>
-
-                            {error && <p>{error}</p>}
 
                             <div style={Formdivbutton}>
                                 <button style={ButtonSignup} onClick={handleSubmit}>Log In</button>
@@ -146,6 +158,7 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            <div style={errorMessage}>{error && <p>{error}</p>}</div>
         </>
     )
 };

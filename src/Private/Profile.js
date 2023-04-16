@@ -1,6 +1,9 @@
 import React from "react";
-
+import withAuth from "../Utils/withAuth";
 const Profile = () => {
+  const token = localStorage.getItem("token");
+  
+
 
     const PProfile = {
         margin: "auto",
@@ -74,4 +77,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default withAuth(Profile);
