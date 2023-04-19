@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Back from "../Back";
 
 const Login = () => {
     const [email, setEmail] = useState("John@doe.com");
@@ -10,6 +11,13 @@ const Login = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
+    // const firstName = localStorage.getItem("firstname");
+    // const lastName = localStorage.getItem("lastname");
+    // console.log(firstName, lastName);
+
+    if (token) {
+        window.location = '/profile';
+    }
 
 
 
@@ -23,9 +31,13 @@ const Login = () => {
 
         try {
             const response = await axios.post('http://localhost:3001/login', data);
+            // const { token } = response.data;
+            const { id } = response.data;
+
+            localStorage.setItem("token", response.data.token, token);
+            localStorage.setItem("userId", response.data.id, id);
             console.log(response.data);
-            const { token } = response.data;
-            localStorage.setItem("token", response.data.token);
+            console.log(id);
             navigate("/profile");
         } catch (error) {
             if (error.response) {
@@ -159,6 +171,7 @@ const Login = () => {
                 </div>
             </div>
             <div style={errorMessage}>{error && <p>{error}</p>}</div>
+            <Back />
         </>
     )
 };

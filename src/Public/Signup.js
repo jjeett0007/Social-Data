@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Back from "../Back";
 
 const Signup = () => {
 
@@ -144,32 +145,32 @@ const Signup = () => {
                             <div style={Formdiv}>
                                 <label>First name</label>
                                 <br></br>
-                                <input style={input} placeholder={firstname} onChange={(event) => setFirstname(event.target.value)} />
+                                <input style={input} placeholder={firstname} onChange={(event) => setFirstname(event.target.value)} required/>
                             </div>
                             <div style={Formdiv}>
                                 <label>Surname</label>
                                 <br></br>
-                                <input style={input} placeholder={surname} onChange={(event) => setSurname(event.target.value)} />
+                                <input style={input} placeholder={surname} onChange={(event) => setSurname(event.target.value)} required/>
                             </div>
                             <div style={Formdiv}>
                                 <label>Email</label>
                                 <br></br>
-                                <input style={input} type="email" placeholder={email} onChange={(event) => setEmail(event.target.value)} />
+                                <input style={input} type="email" placeholder={email} onChange={(event) => setEmail(event.target.value)} required/>
                             </div>
                             <div style={Formdiv}>
                                 <label>Phone Number</label>
                                 <br></br>
-                                <input style={input} placeholder={number} onChange={(event) => setNumber(event.target.value)} />
+                                <input style={input} placeholder={number} onChange={(event) => setNumber(event.target.value)} required/>
                             </div>
                             <div style={Formdiv}>
                                 <label>Password</label>
                                 <br></br>
-                                <input style={input} type="password" placeholder={password} onChange={(event) => setPassword(event.target.value)} />
+                                <input style={input} type="password" placeholder={password} onChange={(event) => setPassword(event.target.value)} required/>
                             </div>
                             <div style={Formdiv}>
                                 <label>Confirm Password</label>
                                 <br></br>
-                                <input style={input} type="password" placeholder={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                                <input style={input} type="password" placeholder={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required/>
                             </div>
 
                             <div style={Formdivbutton}>
@@ -183,6 +184,7 @@ const Signup = () => {
                 </div>
             </div>
             <div style={errorMessage}>{error && <p>{error}</p>}</div>
+            <Back />
         </>
     )
 };

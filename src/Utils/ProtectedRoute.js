@@ -1,15 +1,23 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { Route } from 'react-router-dom'
+import Redirecting from './Redirecting'
 
-const ProtectedRoute = ({ isAuthenticated, children }) => {
-  const navigate = useNavigate();
+const ProtectedRoute = ({
+  component: Component,
+  componentProps,
+  isAuthenticated,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticated ? (
+        <Component {...props} {...componentProps} />
+      ) : (
+        <Redirecting to='/login' />
+      )
+    }
+  />
+)
 
-  if (!isAuthenticated) {
-    navigate("/login");
-    return null;
-  }
-
-  return children;
-};
-
-export default ProtectedRoute;
+// export default ProtectedRoute

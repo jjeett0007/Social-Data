@@ -1,8 +1,43 @@
 import React from "react";
-import withAuth from "../Utils/withAuth";
+import Back from "../Back";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+
 const Profile = () => {
-  const token = localStorage.getItem("token");
-  
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const [firstname, setFirstName] = useState("");
+    const [surname, setLastName] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    if (!token) {
+        window.location = '/login';
+    }
+
+    console.log(userId);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            setIsLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:3001/user/${userId}`);
+                const { firstname, surname } = response.data;
+                console.log(response.data);
+                setFirstName(firstname);
+                setLastName(surname);
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchUser();
+    }, [userId]);
+
+    console.log(firstname)
+
+
 
 
     const PProfile = {
@@ -55,20 +90,49 @@ const Profile = () => {
         margin: "auto",
     }
 
+    // const loader = {
+    //     width: "20px",
+    //     height: "20px",
+    //     border: "3px solid red",
+    //     borderRadius: "50%",
+    //     borderTop: "3px solid blue",
+    //     WebkitAnimation: "spin 2s linear infinite",
+    //     animation: "spin 2s linear infinite",
+    // }
+
+
+
+
     return (
         <>
+            <Back />
             <div style={PProfile}>
                 <div style={Profile1}>
                     <div style={Profile2}></div>
                     <div style={Profile3}>
                         <div style={FetchedData}>
-                            <p style={Datafetched}>Fetch Data</p>
+                            <p style={Datafetched}>
+                                {isLoading ?
+                                    <div className="fa fa-spinner fa-spin"></div> :
+                                    (<div>{firstname}</div>)
+                                }
+                            </p>
                         </div>
                         <div style={FetchedData}>
-                            <p style={Datafetched}>Fetch Data</p>
+                            <p style={Datafetched}>
+                                {isLoading ?
+                                    <div className="fa fa-spinner fa-spin"></div> :
+                                    (<div>{surname}</div>)
+                                }
+                            </p>
                         </div>
                         <div style={FetchedData}>
-                            <p style={Datafetched}>Fetch Data</p>
+                            <p style={Datafetched}>
+                                {isLoading ?
+                                    <div className="fa fa-spinner fa-spin"></div> :
+                                    (<div className="fa fa-spinner fa-spin"></div>)
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -77,4 +141,4 @@ const Profile = () => {
     )
 }
 
-export default withAuth(Profile);
+export default Profile;

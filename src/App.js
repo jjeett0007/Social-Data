@@ -5,6 +5,7 @@ import Home from './Public/Home';
 import Signup from './Public/Signup';
 import Login from './Public/Login';
 import Profile from './Private/Profile';
+// import PrivateRoutes from './Utils/PrivateRoutes';
 
 
 function App() {
@@ -48,7 +49,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} exact />
+            {/* <Routes element={<PrivateRoutes />}>
+              <Route path="/profile" element={<Profile />} exact />
+            </Routes> */}
+          
+            {/* <PrivateRoutes path="/profile" element={<Profile />} /> */}
           </Routes>
         </BrowserRouter>
       </div>
