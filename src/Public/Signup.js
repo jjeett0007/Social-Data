@@ -13,12 +13,15 @@ const Signup = () => {
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [error, setError] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
 
 
     async function handleSubmit(event) {
         event.preventDefault();
+
+        setIsLoading(true);
 
         const data = {
             firstname,
@@ -54,6 +57,8 @@ const Signup = () => {
             } else {
                 setError("Something went wrong. Please check your internet connection and try again.");
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -145,36 +150,42 @@ const Signup = () => {
                             <div style={Formdiv}>
                                 <label>First name</label>
                                 <br></br>
-                                <input style={input} placeholder={firstname} onChange={(event) => setFirstname(event.target.value)} required/>
+                                <input style={input} placeholder={firstname} onChange={(event) => setFirstname(event.target.value)} required />
                             </div>
                             <div style={Formdiv}>
                                 <label>Surname</label>
                                 <br></br>
-                                <input style={input} placeholder={surname} onChange={(event) => setSurname(event.target.value)} required/>
+                                <input style={input} placeholder={surname} onChange={(event) => setSurname(event.target.value)} required />
                             </div>
                             <div style={Formdiv}>
                                 <label>Email</label>
                                 <br></br>
-                                <input style={input} type="email" placeholder={email} onChange={(event) => setEmail(event.target.value)} required/>
+                                <input style={input} type="email" placeholder={email} onChange={(event) => setEmail(event.target.value)} required />
                             </div>
                             <div style={Formdiv}>
                                 <label>Phone Number</label>
                                 <br></br>
-                                <input style={input} placeholder={number} onChange={(event) => setNumber(event.target.value)} required/>
+                                <input style={input} placeholder={number} onChange={(event) => setNumber(event.target.value)} required />
                             </div>
                             <div style={Formdiv}>
                                 <label>Password</label>
                                 <br></br>
-                                <input style={input} type="password" placeholder={password} onChange={(event) => setPassword(event.target.value)} required/>
+                                <input style={input} type="password" placeholder={password} onChange={(event) => setPassword(event.target.value)} required />
                             </div>
                             <div style={Formdiv}>
                                 <label>Confirm Password</label>
                                 <br></br>
-                                <input style={input} type="password" placeholder={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required/>
+                                <input style={input} type="password" placeholder={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required />
                             </div>
 
                             <div style={Formdivbutton}>
-                                <button type="submit" style={ButtonSignup} onClick={handleSubmit}>Sign Up</button>
+                                <button type="submit" style={ButtonSignup} onClick={handleSubmit}>
+                                    {isLoading ? (
+                                        <div className="fa fa-spinner fa-spin"></div>
+                                    ) : (
+                                        "Sign Up"
+                                    )}
+                                </button>
                             </div>
                             <div style={Formdivlogin}>
                                 <p style={Login}>Don't have an account? <Link to="/login">Login</Link></p>

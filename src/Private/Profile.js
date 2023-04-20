@@ -2,6 +2,7 @@ import React from "react";
 import Back from "../Back";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const Profile = () => {
@@ -108,7 +109,11 @@ const Profile = () => {
             <Back />
             <div style={PProfile}>
                 <div style={Profile1}>
-                    <div style={Profile2}></div>
+                    <div style={Profile2}>
+                        <button>
+                            <Link to="/">Home</Link>
+                        </button>
+                    </div>
                     <div style={Profile3}>
                         <div style={FetchedData}>
                             <p style={Datafetched}>

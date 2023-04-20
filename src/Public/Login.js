@@ -8,14 +8,13 @@ const Login = () => {
     const [email, setEmail] = useState("John@doe.com");
     const [password, setPassword] = useState("Password");
     const [error, setError] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
-    // const firstName = localStorage.getItem("firstname");
-    // const lastName = localStorage.getItem("lastname");
-    // console.log(firstName, lastName);
 
     if (token) {
+        alert("you have been Authenticated");
         window.location = '/profile';
     }
 
@@ -23,6 +22,8 @@ const Login = () => {
 
     async function handleSubmit(event) {
         event.preventDefault();
+
+        setIsLoading(true);
 
         const data = {
             email,
@@ -57,6 +58,8 @@ const Login = () => {
             } else {
                 setError("Something went wrong. Please check your internet connection and try again.");
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -161,7 +164,13 @@ const Login = () => {
                             </div>
 
                             <div style={Formdivbutton}>
-                                <button style={ButtonSignup} onClick={handleSubmit}>Log In</button>
+                                <button style={ButtonSignup} onClick={handleSubmit}>
+                                    {isLoading ? (
+                                        <div className="fa fa-spinner fa-spin"></div>
+                                    ) : (
+                                        "Log In"
+                                    )}
+                                </button>
                             </div>
                             <div style={Formdivlogin}>
                                 <p style={Login}>Don't have an account? <Link to="/signup">Sign Up</Link></p>
