@@ -8,6 +8,7 @@ import Profile from './Private/Profile';
 import PictureUpload from './Private/UploadPix';
 import Movie from './Public/Movie';
 import InputData from './Public/Input';
+import FetchInput from './Public/fetchInput';
 // import PrivateRoutes from './Utils/PrivateRoutes';
 
 
@@ -90,7 +91,9 @@ function App() {
             <Route path="/profile" element={<Profile />} exact />
             <Route path="/upload" element={<PictureUpload />} exact />
             <Route path="/movie" element={<Movie />} exact />
-            <Route path="/data" element={<InputData />} exact />
+            <Route path="/input" element={<InputData />} exact />
+            <Route path="/input/:id" element={<InputData />} exact />
+            <Route path="/fetch" element={<FetchInput />} exact />
             {/* <Routes element={<PrivateRoutes />}>
               <Route path="/profile" element={<Profile />} exact />
             </Routes> */}

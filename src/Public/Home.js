@@ -72,7 +72,10 @@ const Home = () => {
                             <Link to="/movie">Movie</Link>
                         </button>
                         <button>
-                            <Link to="/data">Forms</Link>
+                            <Link to="/input">Forms</Link>
+                        </button>
+                        <button>
+                            <Link to="/fetch">Fetch</Link>
                         </button>
                     </div>
                 </div>
