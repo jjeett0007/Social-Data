@@ -68,6 +68,12 @@ const Home = () => {
                         <button>
                             <Link to="/profile">Profile</Link>
                         </button>
+                        <button>
+                            <Link to="/movie">Movie</Link>
+                        </button>
+                        <button>
+                            <Link to="/data">Forms</Link>
+                        </button>
                     </div>
                 </div>
                 <Outlet/>

@@ -10,10 +10,12 @@ const Profile = () => {
     const userId = localStorage.getItem("userId");
     const [firstname, setFirstName] = useState("");
     const [surname, setLastName] = useState("");
+    const [number, setNumber] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
 
     if (!token) {
+        alert("Please Login to view Profile")
         window.location = '/login';
     }
 
@@ -24,10 +26,11 @@ const Profile = () => {
             setIsLoading(true);
             try {
                 const response = await axios.get(`http://localhost:3001/user/${userId}`);
-                const { firstname, surname } = response.data;
+                const { firstname, surname, number } = response.data;
                 console.log(response.data);
                 setFirstName(firstname);
                 setLastName(surname);
+                setNumber(number);
                 setIsLoading(false);
             } catch (error) {
                 console.log(error);
@@ -111,7 +114,7 @@ const Profile = () => {
                 <div style={Profile1}>
                     <div style={Profile2}>
                         <button>
-                            <Link to="/">Home</Link>
+                            <Link to="/upload">Upload Picture</Link>
                         </button>
                     </div>
                     <div style={Profile3}>
@@ -135,7 +138,7 @@ const Profile = () => {
                             <p style={Datafetched}>
                                 {isLoading ?
                                     <div className="fa fa-spinner fa-spin"></div> :
-                                    (<div className="fa fa-spinner fa-spin"></div>)
+                                    (<div>{number}</div>)
                                 }
                             </p>
                         </div>

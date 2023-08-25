@@ -6,12 +6,13 @@ import Back from "../Back";
 
 const Signup = () => {
 
-    const [firstname, setFirstname] = useState("John");
+    const [firstname, setFirstname] = useState("Johns");
     const [surname, setSurname] = useState("Doe");
     const [email, setEmail] = useState("john@doe.com");
     const [number, setNumber] = useState("+234 (0) 8012345678");
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
+    const [picture, setPicture] = useState();
     const [error, setError] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,8 +29,9 @@ const Signup = () => {
             surname,
             email,
             number,
+            picture,
             password,
-            confirmPassword
+            confirmPassword,
         };
 
         try {
@@ -41,6 +43,9 @@ const Signup = () => {
                 switch (error.response.status) {
                     case 400:
                         setError("Fill all Input");
+                        break;
+                    case 409:
+                        setError("upload picture please");
                         break;
                     case 401:
                         setError("Unauthorized, User Already Exist");
@@ -62,13 +67,14 @@ const Signup = () => {
         }
     }
 
+
     // eslint-disable-next-line no-restricted-globals
 
 
     const Signup = {
         margin: "auto",
         width: "43%",
-        height: "70%",
+        height: "77%",
         backgroundColor: "rgb(25, 25, 25)",
         borderRadius: "10px",
         display: "flex",
@@ -176,6 +182,12 @@ const Signup = () => {
                                 <label>Confirm Password</label>
                                 <br></br>
                                 <input style={input} type="password" placeholder={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required />
+                            </div>
+
+                            <div style={Formdiv}>
+                                <balel>Uplad Picture</balel>
+                                <br></br>
+                                <input type="file" accept=".jpg,.png" onChange={(event) => setPicture(event.target.value)} required />
                             </div>
 
                             <div style={Formdivbutton}>

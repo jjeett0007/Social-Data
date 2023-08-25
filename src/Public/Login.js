@@ -6,6 +6,7 @@ import Back from "../Back";
 
 const Login = () => {
     const [email, setEmail] = useState("John@doe.com");
+    const [number, setNumber] = useState("")
     const [password, setPassword] = useState("Password");
     const [error, setError] = useState();
     const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +15,7 @@ const Login = () => {
 
 
     if (token) {
+        console.log(token)
         alert("you have been Authenticated");
         window.location = '/profile';
     }
@@ -27,6 +29,7 @@ const Login = () => {
 
         const data = {
             email,
+            number,
             password,
         };
 
@@ -155,12 +158,12 @@ const Login = () => {
                             <div style={Formdiv}>
                                 <label>Email</label>
                                 <br></br>
-                                <input type="email" value={email} style={input} onChange={(event) => setEmail(event.target.value)} require />
+                                <input type="email" placeholder={email} style={input} onChange={(event) => setEmail(event.target.value)} require />
                             </div>
                             <div style={Formdiv}>
                                 <label>Password</label>
                                 <br></br>
-                                <input type="password" value={password} style={input} onChange={(event) => setPassword(event.target.value)} require />
+                                <input type="password" placeholder={password} style={input} onChange={(event) => setPassword(event.target.value)} require />
                             </div>
 
                             <div style={Formdivbutton}>

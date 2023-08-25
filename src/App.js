@@ -5,6 +5,9 @@ import Home from './Public/Home';
 import Signup from './Public/Signup';
 import Login from './Public/Login';
 import Profile from './Private/Profile';
+import PictureUpload from './Private/UploadPix';
+import Movie from './Public/Movie';
+import InputData from './Public/Input';
 // import PrivateRoutes from './Utils/PrivateRoutes';
 
 
@@ -24,6 +27,7 @@ function App() {
     margin: "auto",
     borderRadius: "10px",
     backgroundColor: "black",
+    color: "white",
   };
 
   const division2 = {
@@ -39,9 +43,43 @@ function App() {
     alignItems: "center",
   };
 
+  const DisplayArea = {
+    width: "90%",
+    height: "400px",
+    border: "2px solid red",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "20px",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }
+
+  const DisplayAreaone = {
+    width: "95%",
+    height: "150px",
+    border: "1px solid yellow",
+    margin: "auto",
+    
+  }
+
+  const DisplayAreatwo = {
+    width: "95%",
+    height: "150px",
+    border: "1px solid yellow",
+    margin: "auto",
+    
+  }
+
   return (
     <div style={App} className="App">
-      <div style={division1}></div>
+      <div style={division1}>
+        <div style={DisplayArea}>
+          <div style={DisplayAreaone}></div>
+          <div style={DisplayAreatwo}></div>
+        </div>
+      </div>
 
       <div style={division2}>
         <BrowserRouter>
@@ -50,10 +88,13 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} exact />
+            <Route path="/upload" element={<PictureUpload />} exact />
+            <Route path="/movie" element={<Movie />} exact />
+            <Route path="/data" element={<InputData />} exact />
             {/* <Routes element={<PrivateRoutes />}>
               <Route path="/profile" element={<Profile />} exact />
             </Routes> */}
-          
+
             {/* <PrivateRoutes path="/profile" element={<Profile />} /> */}
           </Routes>
         </BrowserRouter>
